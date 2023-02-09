@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:us-east-1:323017588889:DCS_IRIDIUM:56b23e9d-ee7d-4b09-8289-e27e23779db8",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "cd6b6b95-3d7a-5ab2-8e38-37ca4ee14765",
+        "TopicArn": "arn:aws:sns:us-east-1:323017588889:DCS_IRIDIUM",
+        "Subject": null,
+        "Message": "<DcpMsg flags=\"0x00008055\" platformId=\"300234066087050\">\n  <XmitTime>2023/040 22:14:00.000</XmitTime>\n  <MOMSM>7588</MOMSM>\n  <CDR_Reference>862442920</CDR_Reference>\n  <SessionStatus>0</SessionStatus>\n  <LocalRecvTime>2023/040 22:19:07.239</LocalRecvTime>\n  <BinaryMsg>\nSUQ9MzAwMjM0MDY2MDg3MDUwLFRJTUU9MjMwNDAyMjE0MDAsU1RBVD0wMCxNTz0wNzU4OCxNVD0wMDAwMCxDRFI9MzM2N0Q1QTgsTEFUPTIxLjEzMTY4LExPTj0tMTU2Ljc5NjM1LFJBRD00IElFOjAyMDA3OCAwDQowMi8wOS8yMDIzLDIyOjA1OjAwLEhHLDIuMzgNCjAyLzA5LzIwMjMsMjI6MDA6MDAsSEcsMi4zMw0KMDIvMDkvMjAyMywyMTo1NTowMCxIRywyLjI4DQowMi8wOS8yMDIzLDIyOjAwOjAwLEJWLDEyLjM2DQo=  </BinaryMsg>\n</DcpMsg>\n",
+        "Timestamp": "2023-02-09T22:19:07.277Z",
+        "SignatureVersion": "1",
+        "Signature": "UZ0xargjCL09nFt+gXken9yoRk80nJiOOpjOQ3uQGjicTnmb4Pbpma3FwIX/GGBpWc9CQnn+67STZJelBqa7vAWRn3/yt5UzGQcYRSO6nCooXi5zowjV4iTUCbb4088tkVjAd/j/EWzbekZ7hFDISn4gJ9rsTQWlEz79bAkIjupjWjTbErExlvum9idTxnf4KMtHHMhiy18QnsVZ2fe0DbfEkMESjsWSwG0Sn73R45EgukvK8ymxz2VJPE43lx77zz0VWOxpoMsxK8dNNF1d2bwyJjO+wUT/mnq6yy4J4Xzy8nzeg69SE1yw/4ED7aGaDXPMTpxc7R9exJITSdc9IQ==",
+        "SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-56e67fcb41f6fec09b0196692625d385.pem",
+        "UnsubscribeUrl": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:323017588889:DCS_IRIDIUM:56b23e9d-ee7d-4b09-8289-e27e23779db8",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}

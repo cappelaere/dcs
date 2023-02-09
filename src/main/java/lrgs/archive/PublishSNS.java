@@ -35,7 +35,7 @@ public class PublishSNS {
         .withTopicArn(DCSGoesMessageTopicArn)
         .withMessage(xml));
     } else {
-      logger.instance().warning("DCS_GOES_ARN undefined");
+      Logger.instance().warning("DCS_GOES_ARN undefined");
     }
   }
 
@@ -47,7 +47,7 @@ public class PublishSNS {
         .withTopicArn(DCSIridiumMessageTopicArn)
         .withMessage(xml));
     } else {
-      logger.instance().warning("DCS_DOES_ARN undefined");
+      Logger.instance().warning("DCS_IRIDIUM_ARN undefined");
     }
   }
 

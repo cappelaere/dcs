@@ -14,17 +14,22 @@ sudo mount /dev/xvdf /app
 ## Installation
 
 ### install Java-11
-sudo yum install java-1.8.0-amazon-corretto
-sudo yum install java-11-amazon-corretto-headless
+sudo yum install java-11-amazon-corretto
 
-## Make sure to keep java-11
-sudo alternatives --config java
-sudo alternatives --config javac
-
-sudo yum install mvn
 sudo yum install maven
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+nvm install v16
 
-yum install git
+sudo yum install git
+
+## install ant 1.10.2 so we can build
+wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.10.3-bin.tar.gz
+tar xvfvz apache-ant-1.10.3-bin.tar.gz 
+sudo ln -sfn /home/ec2-user/apache-ant-1.10.3 /opt/ant
+sudo sh -c 'echo ANT_HOME=/opt/ant >> /etc/environment'
+sudo ln -sfn /opt/ant/bin/ant /usr/bin/ant
+
+## clone the app
 cd /app
 git clone https://github.com/opendcs/opendcs.git
 
@@ -35,14 +40,10 @@ src/main/java/lrgs/archive/PublishSNS.java -> opendcs/
 src/ivy.xml -> opendcs
 
 
-## install ant 1.10.2 so we can build
-wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.10.3-bin.tar.gz
-tar xvfvz apache-ant-1.10.3-bin.tar.gz 
-sudo ln -sfn /app/dcs/apache-ant-1.10.3 /opt/ant
-sudo sh -c 'echo ANT_HOME=/opt/ant >> /etc/environment'
-sudo ln -sfn /opt/ant/bin/ant /usr/bin/ant
-
 ## Build
+cd /app/dcs
+source .env
+cd opendcs
 ant jar
 ant opendcs
 
@@ -63,10 +64,11 @@ run editPasswd
 
 ## Edit ddsrecv.conf
 
-## Restart LGRS
-startLRGS -l $LRGSHOME/lrgslog -d 3
-
-## Rebuild jar
+## Rebuild jar as necessary
 cd opendcs
 ant jar
 cp /app/dcs/opendcs/build/lib/opendcs.jar /app/dcs/opendcs/OPENDCS/bin/opendcs.jar
+
+## Restart LGRS
+startLRGS -l $LRGSHOME/lrgslog #-d 3
+

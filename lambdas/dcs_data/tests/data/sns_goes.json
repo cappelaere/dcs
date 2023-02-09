@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:us-east-1:323017588889:DCS_GOES:8c74fb8d-fcae-437f-b12b-4557be2736e7",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "42ac1283-75c6-5576-a2c9-4edc183f9edd",
+        "TopicArn": "arn:aws:sns:us-east-1:323017588889:DCS_GOES",
+        "Subject": null,
+        "Message": "<DcpMsg flags=\"0x00081855\" platformId=\"56B92084\">\n  <DomsatSeq>61136</DomsatSeq>\n  <DomsatTime>1970/001 00:00:00.000</DomsatTime>\n  <CarrierStart>2023/040 21:54:15.303</CarrierStart>\n  <CarrierStop>2023/040 21:54:19.708</CarrierStop>\n  <Baud>300</Baud>\n  <GoodPhasePct>100.0</GoodPhasePct>\n  <FreqOffset>-1.4</FreqOffset>\n  <SignalStrength>41.9</SignalStrength>\n  <PhaseNoise>1.61</PhaseNoise>\n  <LocalRecvTime>2023/040 21:55:05.288</LocalRecvTime>\n  <BinaryMsg>\nNTZCOTIwODQyMzA0MDIxNTQxNUc0Mi0wTk4zMTFFVVAwMDEzNiINCjEzLjg1IDAuMDIgMTEuMDAgNDY3LjgwIDUuNTAgMzAuNTAgMTUuNzAgMjkuMzAgNjM1LjgwIDEwLjkwIDAuMDANCjEzLjg2IDAuMDIgMTEuMTAgNjE5LjkwIDYuMDAgMjguODAgMTYuNDAgMjYuMjAgNjM1LjkwIDEwLjkwIDAuMDANCiA=  </BinaryMsg>\n</DcpMsg>\n",
+        "Timestamp": "2023-02-09T21:55:05.306Z",
+        "SignatureVersion": "1",
+        "Signature": "De3WLQvMYYM+Ojo4zQrCnnBFN/Ct6LLZOMHg7WsNZlETSoCRiTNBehqn3K0C5VAnhZFIG5NJDXIhzuqXM5VqaQDoHACDUgV5tEgVhsVNkx4lqexsmHXDogTOb+MFGTygE2+lg2hE5rqgbCQduHnzfqoGwGzzyOSJcwqqWU131AJqdDgacGjep3QfWjQXKSr1S4J7mPF1s8Xs5GVEA+dh/Z4HwQ86bB/IGpEwhcHnv3Ypfv+n8oFQ0TCv3TNyaz/r4U1wysu1o0dx3tyBAT6AlBCRgryY/W0rxdlE4GZY4BxEIlwUg3bur812NMzkb0xw5KrPv4k4vpc0PQ18d0UNSQ==",
+        "SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-56e67fcb41f6fec09b0196692625d385.pem",
+        "UnsubscribeUrl": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:323017588889:DCS_GOES:8c74fb8d-fcae-437f-b12b-4557be2736e7",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}
