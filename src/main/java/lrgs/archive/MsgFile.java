@@ -31,6 +31,8 @@ import ilex.xml.XmlOutputStream;
 import lrgs.ldds.ExtBlockXmlParser;
 import lrgs.ldds.ProtocolError;
 
+import java.lang.System;
+
 /**
 IO Methods for reading & writing periodic files contining DCP messages.
 */
@@ -361,12 +363,18 @@ public class MsgFile
 //			Logger.instance().info("MsgFile Writing NON-GOES message:\n" 
 //				+ new String(baos.toByteArray()));
 
-		// PGC raf.write(baos.toByteArray());
-        if (msg.isGoesMessage()) {
-			Logger.instance().info("MsgFile Writing GOES message:\n" 
-				+ new String(baos.toByteArray()));
-            PublishSQS.Send(baos.toByteArray());
-        }
+		raf.write(baos.toByteArray());
+
+		if( System.getenv("AWS_REGION") != null ) {
+			String xml = new String(baos.toByteArray());
+    	    if (msg.isGoesMessage()) {
+           		PublishSNS.SendGoesMessage(xml);
+			} else if (msg.isIridium()) {
+            	PublishSNS.SendIridiumMessage(xml);
+			}
+		} else {
+			warning("AWS_REGION Undefined to publish GOES msg");
+		}
 	}
 	
 	private void markMsgDeletedXml(long loc)
