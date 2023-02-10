@@ -4,4 +4,9 @@ aws-java-sdk-1.12.401/
 apache-ant-1.10.3-bin.tar.gz
 apache-ant-1.10.3/
 .env
-lambdas/dcs_data/lambda/node_modules
+lambdas/dcs_data/lambda/node_modules/
+lambdas/dcs_data/layer/nodejs/node_modules/
+
+lambdas/dcs_metrics/lambda/node_modules/
+lambdas/dcs_metrics/layer/nodejs/node_modules/
+**/*.zip

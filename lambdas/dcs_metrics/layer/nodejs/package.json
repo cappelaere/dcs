@@ -1,0 +1,17 @@
+{
+  "name": "dcs_metrics_layer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pat Cappelaere",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.6.0",
+    "fast-xml-parser": "^4.1.1",
+    "moment": "^2.29.4",
+    "standard": "^17.0.0"
+  }
+}
