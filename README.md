@@ -39,7 +39,6 @@ src/main/java/lrgs/archive/MsgFile.java -> opendcs/
 src/main/java/lrgs/archive/PublishSNS.java -> opendcs/
 src/ivy.xml -> opendcs
 
-
 ## Build
 cd /app/dcs
 source .env
