@@ -3,13 +3,19 @@ const path = require('path')
 
 const { handler } = require('../lambda/index.js')
 
-const testEvent = async () => {
-    const json = fs.readFileSync(path.join(__dirname, 'data/event.json'), 'utf-8')
+const testEvent1 = async () => {
+    const json = fs.readFileSync(path.join(__dirname, 'data/event1.json'), 'utf-8')
+    await handler(JSON.parse(json))
+}
+
+const testEvent2 = async () => {
+    const json = fs.readFileSync(path.join(__dirname, 'data/event2.json'), 'utf-8')
     await handler(JSON.parse(json))
 }
 
 const test = async () => {
-    await testEvent()
+    await testEvent1()
+    await testEvent2()
 }
 
 test()

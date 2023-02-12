@@ -1,3 +1,8 @@
+//
+// Lambda to get the logs frm SNS topic and send them to ElasticSaearch
+//
+// Pat Cappelaere, IBM Consulting
+//
 const { IndexLogDocument } = require('./es.js')
 const moment = require('moment')
 

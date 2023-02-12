@@ -14,8 +14,8 @@ const testSNSIridium = async () => {
 }
 
 const test = async () => {
-    await testSNSGoes()
-    //await testSNSIridium()
+    // await testSNSGoes()
+    await testSNSIridium()
 }
 
 test()

@@ -7,7 +7,7 @@
 const { Kafka } = require('kafkajs')
 const { Partitioners } = require('kafkajs')
 
-const assert = require('assert')
+const { assert } = require('console')
 
 const KAFKA_API_KEY = process.env.KAFKA_API_KEY
 const KAFKA_API_SECRET = process.env.KAFKA_API_SECRET

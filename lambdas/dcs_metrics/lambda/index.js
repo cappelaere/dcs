@@ -17,12 +17,15 @@ const ParseXml = async (xmlMessage) => {
       DownLink[d].Quality = DownLink[d].Quality[DownLink[d].Quality.length - 1]
       DownLink[d].LastMsgRecvTime = moment.unix(DownLink[d].LastMsgRecvTime).format()
     }
+    if (DownLink[d].LastMsgRecvTime === 0) {
+      DownLink[d].LastMsgRecvTime = "1970-01-01T00:00:00+00:00"
+    }
   }
 
   LrgsStatusSnapshot.SystemTime = moment(LrgsStatusSnapshot.SystemTime).format()
   LrgsStatusSnapshot.ArchiveStatistics.oldestMsgTime = moment.unix(LrgsStatusSnapshot.ArchiveStatistics.oldestMsgTime).format()
 
-  console.log(JSON.stringify(LrgsStatusSnapshot, null, '\t'))
+  // console.log(JSON.stringify(LrgsStatusSnapshot, null, '\t'))
   return LrgsStatusSnapshot
 }
 

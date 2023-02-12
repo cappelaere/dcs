@@ -7,7 +7,7 @@
 //
 
 const { Client } = require('@elastic/elasticsearch')
-const { assert } = require('assert')
+const { assert } = require('console')
 
 const ES_CLOUD_ID = process.env.ES_CLOUD_ID
 const ES_USER = process.env.ES_USER
@@ -27,26 +27,29 @@ const options = {
 
 const esClient = new Client(options)
 
-const SEARCH_CIDS_INDEX = process.env.SEARCH_CIDS_INDEX
+const SEARCH_DCS_CIDS_INDEX = process.env.SEARCH_DCS_CIDS_INDEX
 const SEARCH_DCS_GOES_INDEX = process.env.SEARCH_DCS_GOES_INDEX
 const SEARCH_DCS_IRIDIUM_INDEX = process.env.SEARCH_DCS_IRIDIUM_INDEX
 
-assert(SEARCH_CIDS_INDEX)
+assert(SEARCH_DCS_CIDS_INDEX)
 assert(SEARCH_DCS_GOES_INDEX)
 assert(SEARCH_DCS_IRIDIUM_INDEX)
 
 const IndexDocument = async (index, document) => {
-  // FOR NOW
+  try {
+    const result = await esClient.index({
+      index,
+      document
+    })
+    console.log(result)
+  } catch (err) {
+    console.error(err)
+  }
+}
 
-  // try {
-  //   const result = await esClient.index({
-  //     index,
-  //     document
-  //   })
-  //   console.log(result)
-  // } catch (err) {
-  //   console.error(err)
-  // }
+const IndexCid = async (document) => {
+  const result = await IndexDocument(SEARCH_DCS_CIDS_INDEX, document, null)
+  return result
 }
 
 const IndexMessage = async (document) => {
@@ -59,3 +62,4 @@ const IndexMessage = async (document) => {
 
 module.exports.IndexDocument = IndexDocument
 module.exports.IndexMessage = IndexMessage
+module.exports.IndexCid = IndexCid

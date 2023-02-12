@@ -7,7 +7,7 @@
 //
 
 const { Client } = require('@elastic/elasticsearch')
-const { assert } = require('assert')
+const { assert } = require('console')
 
 const ES_CLOUD_ID = process.env.ES_CLOUD_ID
 const ES_USER = process.env.ES_USER

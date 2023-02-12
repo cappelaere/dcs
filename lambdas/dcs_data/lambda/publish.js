@@ -1,4 +1,4 @@
-const { KafkaPublish } = require('kafka.js')
+const { KafkaPublish } = require('./kafka.js')
 
 const PublishMessage = async (json) => {
   // console.log(`Publish msg ${topic}`)

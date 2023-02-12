@@ -1,10 +1,10 @@
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3' // ES Modules import
-import { IndexCid } from './es.js'
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3') // ES Modules import
+const { IndexCid } = require('./es.js')
 
 const CID = require('cids')
 const multihashing = require('multihashing-async')
 const moment = require('moment')
-const assert = require('assert')
+const { assert } = require('console')
 
 const S3_BUCKET = process.env.S3_BUCKET
 const R2_BUCKET = process.env.R2_BUCKET
@@ -41,7 +41,7 @@ const GenerateCid = async (str) => {
 
   const hash = await multihashing(bytes, 'sha2-256')
   const cid = new CID(1, 'raw', hash)
-  return cid
+  return cid.toString()
 }
 
 //
