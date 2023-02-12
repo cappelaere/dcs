@@ -1,0 +1,22 @@
+{
+    "Records": [
+        {
+            "EventSource": "aws:sns",
+            "EventVersion": "1.0",
+            "EventSubscriptionArn": "arn:aws:sns:us-east-1:323017588889:DCS_LOGS:5237ddc5-45c3-4e09-828b-ed0498c0ddd4",
+            "Sns": {
+                "Type": "Notification",
+                "MessageId": "5ff33d36-913e-539c-9a87-6155970a488b",
+                "TopicArn": "arn:aws:sns:us-east-1:323017588889:DCS_LOGS",
+                "Subject": null,
+                "Message": "WARNING 2023/02/12-15:21:22 Could not trap SIGHUP: java.lang.UnsatisfiedLinkError: no ilexjni.el4.64 in java.library.path: [/app/dcs/opendcs/OPENDCS/lib, /usr/java/packages/lib, /usr/lib64, /lib64, /lib, /usr/lib]",
+                "Timestamp": "2023-02-12T15:21:24.253Z",
+                "SignatureVersion": "1",
+                "Signature": "022pg3YSzKhgvyWszsP7BXntY/W+mEEJ362F5wzbg1THqczOKKjYOeLzz/MyINpkrJhKllzTqALUm2VGRQDfI0YnKVXrhb1ajVACm2cTFUroyrwKYGFo+x5Qyg/KxuXnDpj6o6fleWAUDnQXBCc3FXLcbxx8zZVU84jhF0QXyzPskDxrdqPg8kp38knp86jqOg8yrh9Vc8OzYcUZpqdU0YWugW+rAKtK5twoAENLZTYs/xu1UP1xbkyzg4aa1yUmpP13tBQoiwH7n7aqr3hM0MiF4Rnl1Ikk8pRS2SKqEUMetM1U2ESetTyfD1GrhXBySwj69SSzFVKX0Z4QwHy1bA==",
+                "SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-56e67fcb41f6fec09b0196692625d385.pem",
+                "UnsubscribeUrl": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:323017588889:DCS_LOGS:5237ddc5-45c3-4e09-828b-ed0498c0ddd4",
+                "MessageAttributes": {}
+            }
+        }
+    ]
+}

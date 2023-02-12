@@ -1,5 +1,5 @@
 {
-  "name": "dcs_metrics_layer",
+  "name": "dcs_logs_layer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,8 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@elastic/elasticsearch": "^8.6.0",
-    "fast-xml-parser": "^4.1.1",
     "moment": "^2.29.4",
+  },
+  "devDependencies": {
     "standard": "^17.0.0"
   }
 }

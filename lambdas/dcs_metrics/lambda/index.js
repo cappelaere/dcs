@@ -2,7 +2,7 @@ const { XMLParseString } = require('./xmlparse.js')
 const { IndexMetricsDocument } = require('./es.js')
 
 const moment = require('moment')
-const assert = require('assert')
+// const assert = require('assert')
 
 const ParseXml = async (xmlMessage) => {
   const json = await XMLParseString(xmlMessage)
@@ -11,7 +11,7 @@ const ParseXml = async (xmlMessage) => {
   LrgsStatusSnapshot.Quality = Quality[Quality.length - 1]
 
   const DownLink = LrgsStatusSnapshot.DownLink
-  for (let d in DownLink) {
+  for (const d in DownLink) {
     // console.log(d)
     if (DownLink[d].Quality) {
       DownLink[d].Quality = DownLink[d].Quality[DownLink[d].Quality.length - 1]
@@ -27,11 +27,10 @@ const ParseXml = async (xmlMessage) => {
 }
 
 exports.handler = async (event) => {
-
   try {
     const SNSRecord = event.Records[0]
 
-    const topic = SNSRecord.Sns.TopicArn
+    // const topic = SNSRecord.Sns.TopicArn
     const xmlMessage = SNSRecord.Sns.Message
     const json = await ParseXml(xmlMessage)
 
@@ -48,6 +47,6 @@ exports.handler = async (event) => {
       statusCode: 500,
       body: `Error ${err}`
     }
-    return response;
+    return response
   }
 }

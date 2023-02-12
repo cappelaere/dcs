@@ -38,21 +38,19 @@ assert(SEARCH_DCS_IRIDIUM_INDEX)
 assert(SEARCH_DCS_METRICS_INDEX)
 
 const IndexDocument = async (index, document) => {
-  return // FOR NOW
-  // try {
-  //   const result = await esClient.index({
-  //     index,
-  //     document
-  //   })
-  //   console.log(result)
-  // } catch (err) {
-  //   console.error(err)
-  // }
+  try {
+    await esClient.index({
+      index,
+      document
+    })
+    // console.log(result)
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 const IndexMetricsDocument = async (document) => {
-  const result = await IndexDocument(SEARCH_DCS_METRICS_INDEX, document)
-  return result
+  return await IndexDocument(SEARCH_DCS_METRICS_INDEX, document)
 }
 
 module.exports.IndexDocument = IndexDocument

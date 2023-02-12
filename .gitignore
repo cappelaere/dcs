@@ -9,4 +9,11 @@ lambdas/dcs_data/layer/nodejs/node_modules/
 
 lambdas/dcs_metrics/lambda/node_modules/
 lambdas/dcs_metrics/layer/nodejs/node_modules/
+
+lambdas/dcs_logs/lambda/node_modules/
+lambdas/dcs_logs/layer/nodejs/node_modules/
+
+lambdas/dcs_api/lambda/node_modules/
+lambdas/dcs_api/layer/nodejs/node_modules/
+
 **/*.zip
