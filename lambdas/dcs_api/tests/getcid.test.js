@@ -1,8 +1,8 @@
 const fs = require('fs')
-const { handler } = require('../index.js')
+const { handler } = require('../lambda/index.js')
 
 const test_getcid = async () => {
-    const json = JSON.parse(fs.readFileSync('./tests/data/getcid.json', 'utf-8'))
+    const json = JSON.parse(fs.readFileSync('./data/getcid.json', 'utf-8'))
     const result = await handler(json, null, null)
     console.log(result)
 

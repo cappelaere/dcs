@@ -53,7 +53,7 @@ const SearchCid = async (cid) => {
   return await SearchIndex(SEARCH_CIDS_INDEX, cid)
 }
 
-const FormatQuery = (query) => {
+const FormatQuery = (query, timefield, from, to) => {
   const keys = Object.keys(query)
 
   if (keys.length === 1) {
@@ -67,7 +67,29 @@ const FormatQuery = (query) => {
     match[key] = query[key]
     return { match }
   })
-  return { bool: { must: res } }
+
+  const finalQuery = {
+    bool: { must: res }
+  }
+
+  const timefields = {}
+  let range
+
+  if (from) {
+    timefields["gte"] = from
+  }
+  if (to) {
+    timefields["lte"] = to
+  }
+
+  if (timefield && (timefields.length > 0)) {
+    range = {}
+    range[timefield] = timefields
+    finalQuery.bool.must.push({ range })
+  }
+
+  console.log(JSON.stringify(finalQuery, null, '\t'))
+  return finalQuery
 }
 
 const QueryIndex = async (index, query) => {
@@ -87,12 +109,12 @@ const QueryIndex = async (index, query) => {
 //
 // Query GOES or IRIDIUM DCS Indices
 //
-const QueryDcs = async (index, query, userFields, userLimit) => {
+const QueryGeoXOIndex = async (index, query, userFields, userLimit, timefield, from, to) => {
   const fields = userFields || ['cid']
-  const formattedQuery = FormatQuery(query)
+  const formattedQuery = FormatQuery(query, timefield, from, to)
   const limit = parseInt(userLimit)
 
-  console.log(`QueryDcs: ${index}, ${formattedQuery}, ${fields}, ${limit}`)
+  console.log(`QueryGeoXOIndex: ${index}, ${JSON.stringify(formattedQuery)}, ${fields}, ${limit}`)
 
   const results = await QueryIndex(index, formattedQuery)
   console.log(results)
@@ -123,5 +145,12 @@ const QueryDcs = async (index, query, userFields, userLimit) => {
   }
 }
 
+const QueryDcs = async (index, query, userLimit, timefield, from, to) => {
+  timefield = 'LocalRecvTime'
+  return await QueryGeoXOIndex(index, query, userFields, userLimit, timefield, from, to)
+}
+
 module.exports.SearchCid = SearchCid
 module.exports.QueryDcs = QueryDcs
+module.exports.SearchIndex = SearchIndex
+module.exports.QueryGeoXOIndex = QueryGeoXOIndex

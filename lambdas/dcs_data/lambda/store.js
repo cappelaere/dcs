@@ -88,7 +88,7 @@ const StoreData = async (storageClass, bucket, key, contents, contentType) => {
   try {
     const command = new PutObjectCommand(input)
     const response = await client.send(command)
-    console.log(response)
+    // console.log(response)
 
     const cid = await GenerateCid(contents)
     const size = contents.length
@@ -114,13 +114,13 @@ const StoreData = async (storageClass, bucket, key, contents, contentType) => {
 const StoreS3 = async (key, contents, contentType) => {
   const bucket = S3_BUCKET
   await StoreData('s3', bucket, key, contents, contentType)
-  console.log(`Store in S3 bucket: ${bucket}, key:${key} ${contentType}`)
+  // console.log(`Store in S3 bucket: ${bucket}, key:${key} ${contentType}`)
 }
 
 const StoreR2 = async (key, contents, contentType) => {
   const bucket = R2_BUCKET
   await StoreData('r2', bucket, key, contents, contentType)
-  console.log(`Store in R2 bucket: ${bucket}, key: ${key} ${contentType}`)
+  // console.log(`Store in R2 bucket: ${bucket}, key: ${key} ${contentType}`)
 }
 
 const StoreMessage = async (json) => {

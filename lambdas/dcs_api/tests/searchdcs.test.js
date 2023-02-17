@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { handler } = require('../index.js')
+const { handler } = require('../lambda/index.js')
 
 const test_searchdcs = async () => {
     const json = JSON.parse(fs.readFileSync('./tests/data/searchdcs.json', 'utf-8'))

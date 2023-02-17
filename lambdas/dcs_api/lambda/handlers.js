@@ -59,7 +59,7 @@ const SearchDcs = async (params, query, body, identity, agent) => {
   const searchQuery = body.query
   const userFields = body.fields || ['cid']
   const limit = parseInt(body.limit) || 10
-  const sat = query.sat || 'goes'
+  const sat = searchQuery.sat || 'goes'
 
   let index
 

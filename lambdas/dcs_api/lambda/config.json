@@ -1,0 +1,13 @@
+{
+    "audience": "https://geoxo.io",
+    "secret": "9DBVsf2ClCOXKXQRSYpcEMAFxQMBDALr",
+    "url": "https://dev-00yfnd05lnuwnu3p.us.auth0.com/oauth/token",
+    "client_id": "LTtqVPgoRyrsi6keSIHBiv6QzTjMGWSp",
+    "client_secret": "XRShKdS2UAFkUxqot5EzGjrQGKdZ8S2iUAFTIsNwxB_33d-Y4ntN0EhOHOMvoSTC",
+    "envFileName": "./.geoxo.json",
+    "issuerBaseURL": "https://dev-00yfnd05lnuwnu3p.us.auth0.com/",
+    "tokenSigningAlg": "HS256",
+    "app_client_id": "89H9qAPKi5Gzh4uyVpBjsD7yhhzk9Hxz",
+    "app_client_secret": "Yi-NMiUGS0R_5Rt8lZPTnrkTu8gncpTGoR-aXWh_AJEXa_owggquAKtguccQBUNB",
+    "app_audience": "https://geoxo.io/auth"
+}

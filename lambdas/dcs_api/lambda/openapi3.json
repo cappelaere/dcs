@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "version": "0.0.1",
-    "description": "GeoXO API",
+    "description": "GeoXO API Auth",
     "title": "GeoXO"
   },
   "paths": {
@@ -102,7 +102,103 @@
         }
       }
     },
-    "/dcs/login": {
+    "/grb/{cid}": {
+      "get": {
+        "summary": "Info for a specific cid",
+        "operationId": "GetGRBCid",
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "path",
+            "description": "The cid of the record to retrieve",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Record"
+            }
+          },
+          {
+            "name": "class",
+            "in": "query",
+            "description": "The storage classof the record to retrieve",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Record"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/grb/meta/{cid}": {
+      "get": {
+        "summary": "Get metadata for a specific cid",
+        "operationId": "GetGRBCidMeta",
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "path",
+            "description": "The cid of the record to retrieve",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Record"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Record"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/grb/search": {
+      "post": {
+        "summary": "Search DCS for a specific cid",
+        "operationId": "SearchGRB",
+        "requestBody": {
+          "description": "Search for cids",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Query"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Record"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
       "post": {
         "summary": "User login",
         "operationId": "Login",
@@ -131,7 +227,7 @@
         }
       }
     },
-    "/dcs/logout": {
+    "/logout": {
       "get": {
         "summary": "user logout",
         "operationId": "Logout",
@@ -176,48 +272,49 @@
           "password": {
             "type": "string"
           }
-        },
-        "AuthInfo": {
-          "type": "object",
-          "properties": {
-            "access_token": {
-              "type": "string"
-            },
-            "id_token": {
-              "type": "string"
-            }
+        }
+      },
+      "AuthInfo": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string"
           },
-          "Record": {
-            "type": "object",
-            "properties": {
-              "cid": {
-                "type": "string"
-              },
-              "class": {
-                "type": "string"
-              },
-              "url": {
-                "type": "string"
-              }
-            }
+          "id_token": {
+            "type": "string"
+          }
+        }
+      },
+      "Record": {
+        "type": "object",
+        "properties": {
+          "cid": {
+            "type": "string"
           },
-          "Error": {
-            "type": "object",
-            "required": [
-              "code",
-              "message"
-            ],
-            "properties": {
-              "code": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "message": {
-                "type": "string"
-              }
-            }
+          "class": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
           }
         }
       }
     }
   }
+}
