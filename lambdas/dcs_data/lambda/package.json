@@ -1,5 +1,5 @@
 {
-  "name": "dcs_data_metrics",
+  "name": "dcs_data_lambda",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

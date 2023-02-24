@@ -1,0 +1,14 @@
+{
+    "name": "grb_data_lambda",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "npx standard *.js",
+        "tests": "npx jest --coverage",
+        "zip": "zip -q -r ../lambda.zip *.js"
+    },
+    "author": "Pat Cappelaere, IBM Consulting",
+    "license": "ISC"
+}

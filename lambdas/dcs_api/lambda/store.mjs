@@ -8,8 +8,8 @@ import fs from 'fs'
 import * as raw from 'multiformats/codecs/raw'
 import { CID } from 'multiformats/cid'
 import { sha256 } from 'multiformats/hashes/sha2'
-import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3"; // ES Modules import
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3" // ES Modules import
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
 import { ParseDcpToJSON, BrotliEncodeFromXML } from './dcp.js'
 import { ParsePDTFile } from './pdts.js'
@@ -17,7 +17,7 @@ import { IndexCid, SearchCid } from './es.old.js'
 
 import zlib from 'zlib'
 import moment from 'moment'
-import { getEnvironmentData } from 'worker_threads';
+import { getEnvironmentData } from 'worker_threads'
 
 const AWS_REGION = process.env.AWS_REGION || 'us-east-1'
 const AWS_ACCOUNT = process.env.AWS_ACCOUNT
@@ -27,7 +27,7 @@ const R2_KEY = process.env.R2_KEY
 const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY
 const S3_BUCKET = 'geocloud-dcs'
 
-const s3Client = new S3Client({ region: AWS_REGION });
+const s3Client = new S3Client({ region: AWS_REGION })
 
 const r2Client = new S3Client({
     region: "auto",
@@ -43,7 +43,7 @@ const r2Client = new S3Client({
 //
 const GenerateCid = async (bytes) => {
     const hash = await sha256.digest(bytes)
-    const cid = CID.create(1, raw.code, hash)
+    const cid = CID.create(1, 'raw', hash)
     return cid.toString()
 }
 
@@ -85,17 +85,17 @@ const GetData = async (address) => {
             Key: address.key
         }
         try {
-            const command = new GetObjectCommand(input);
-            const response = await client.send(command);
-            const bytes = await response.Body.transformToByteArray();
+            const command = new GetObjectCommand(input)
+            const response = await client.send(command)
+            const bytes = await response.Body.transformToByteArray()
 
             const brotli = zlib.createBrotliDecompress()
-            brotli.write(bytes);
+            brotli.write(bytes)
             brotli.on('data', function (data) {
-                console.log(data.toString());
+                console.log(data.toString())
                 const json = JSON.parse(data.toString())
                 resolve(json)
-            });
+            })
 
             console.log(bytes.length)
         } catch (err) {
@@ -129,8 +129,8 @@ const StoreData = async (storageClass, bucket, key, contents, contentType) => {
         ContentType: contentType
     }
     try {
-        const command = new PutObjectCommand(input);
-        const response = await client.send(command);
+        const command = new PutObjectCommand(input)
+        const response = await client.send(command)
         console.log(response)
 
         const cid = await GenerateCid(contents)
