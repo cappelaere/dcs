@@ -101,7 +101,7 @@ const ProcessEvent = async (record) => {
 
   const fields2 = instrumentProd.split('-')
   let instrument = fields2[0]
-  const dsn = instrumentProd
+  let dsn = instrumentProd
   let level
 
   if (bucket.includes('plt')) {
@@ -122,6 +122,12 @@ const ProcessEvent = async (record) => {
   const insertDelay = 0
   const insertTime = moment().utc().toISOString()
 
+  let mode = 'NA'
+  if (instrument === 'ABI') {
+    const dsnArr = dsn.split('-')
+    mode = dsnArr.pop().slice(0, 2)
+    dsn = dsnArr.join('-')
+  }
   const eventMsg = {
     bucket,
     key,
@@ -138,6 +144,7 @@ const ProcessEvent = async (record) => {
     level,
     instrument,
     dsn,
+    mode,
     imagingDelay,
     creationDelay,
     storageDelay,
@@ -187,7 +194,7 @@ const GenerateCid = async (bytes) => {
   return cid.toString()
 }
 
-exports.handler = async (event) => {
+const handler = async (event) => {
   // console.log(JSON.stringify(event, null, '\t'))
 
   try {
@@ -245,6 +252,7 @@ exports.handler = async (event) => {
       level: eventInfo.level,
       instrument: eventInfo.instrument,
       dsn: eventInfo.dsn,
+      mode: eventInfo.mode,
       fileName: eventInfo.fileName,
       size: eventInfo.fileSize,
       type: contentType
@@ -270,3 +278,6 @@ exports.handler = async (event) => {
     return response
   }
 }
+
+module.exports.handler = handler
+module.exports.ProcessEvent = ProcessEvent

@@ -3,7 +3,7 @@
 //
 
 const { GetCid, DownloadCid, GetCidMeta, SearchDcs, Login, Logout } = require('./handlers.js')
-const { GetGRBCid, DownloadGRBCid, GetGRBCidMeta, SearchGRB } = require('./grb_handlers.js')
+const { GetGRBCid, DownloadGRBCid, GetGRBCidMeta, SearchGRB, SQLSearchGRB } = require('./grb_handlers.js')
 
 const { jwtVerifier1, jwtVerifier2 } = require('./jwt.js')
 
@@ -17,7 +17,8 @@ const handlers = {
   GetGRBCid,
   DownloadGRBCid,
   GetGRBCidMeta,
-  SearchGRB
+  SearchGRB,
+  SQLSearchGRB
 }
 
 // Handler

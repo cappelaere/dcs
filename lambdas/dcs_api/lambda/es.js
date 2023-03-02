@@ -106,6 +106,28 @@ const QueryIndex = async (index, query) => {
   }
 }
 
+const SQLQuery = async (sqlQuery) => {
+  try {
+    const result = await esClient.sql.query({
+      query: sqlQuery
+    })
+    // console.log(result)
+
+    const data = result.rows.map(row => {
+      const obj = {}
+      for (let i = 0; i < row.length; i++) {
+        obj[result.columns[i].name] = row[i]
+      }
+      return obj
+    })
+
+    return data
+  } catch (error) {
+    console.error(error.meta.body)
+    return error.meta.body
+  }
+}
+
 //
 // Query GOES or IRIDIUM DCS Indices
 //
@@ -154,3 +176,4 @@ module.exports.SearchCid = SearchCid
 module.exports.QueryDcs = QueryDcs
 module.exports.SearchIndex = SearchIndex
 module.exports.QueryGeoXOIndex = QueryGeoXOIndex
+module.exports.SQLQuery = SQLQuery

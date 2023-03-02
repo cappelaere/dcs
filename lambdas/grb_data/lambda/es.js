@@ -34,7 +34,7 @@ assert(SEARCH_INDEX, 'Undefined env ES_SEARCH_INDEX')
 
 const IndexDocument = async (index, document) => {
   try {
-    const result = await esClient.index({
+    await esClient.index({
       index,
       document
     })

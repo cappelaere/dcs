@@ -119,7 +119,7 @@
           {
             "name": "class",
             "in": "query",
-            "description": "The storage classof the record to retrieve",
+            "description": "The storage class of the record to retrieve",
             "required": false,
             "schema": {
               "type": "string"
@@ -171,8 +171,37 @@
     },
     "/grb/search": {
       "post": {
-        "summary": "Search DCS for a specific cid",
+        "summary": "Search GRB for a specific cid",
         "operationId": "SearchGRB",
+        "requestBody": {
+          "description": "Search for cids",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Query"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Record"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/grb/sql": {
+      "post": {
+        "summary": "Search GRB for a specific cid using SQL",
+        "operationId": "SQLSearchGRB",
         "requestBody": {
           "description": "Search for cids",
           "required": true,
