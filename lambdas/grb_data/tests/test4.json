@@ -1,0 +1,38 @@
+{
+    "Records": [
+        {
+            "eventVersion": "2.1",
+            "eventSource": "aws:s3",
+            "awsRegion": "us-east-1",
+            "eventTime": "2023-02-24T17:07:36.065Z",
+            "eventName": "ObjectCreated:Copy",
+            "userIdentity": {
+                "principalId": "AWS:AROA4AQ5K37VR7DVL6CAQ:GRB_copy"
+            },
+            "requestParameters": {
+                "sourceIPAddress": "3.229.120.88"
+            },
+            "responseElements": {
+                "x-amz-request-id": "GVQ2YKVZED8WB1R9",
+                "x-amz-id-2": "lMlSJWIJzycnkg9crCieewmwlF3t9tcpgOaLe7pQR/uGcEunqNKlVbGSBWS15aDJ3deoMF8O6FMW/rDTx+RkU6h+DgE6PtN8CFR1nQtUcZY="
+            },
+            "s3": {
+                "s3SchemaVersion": "1.0",
+                "configurationId": "GRB",
+                "bucket": {
+                    "name": "grbprototype",
+                    "ownerIdentity": {
+                        "principalId": "A2VK97DX9LSGO4"
+                    },
+                    "arn": "arn:aws:s3:::grbprototype"
+                },
+                "object": {
+                    "key": "op/GOES-18/l2/GLM/2023/mar/20230302/OR_GLMFD-020-B16-M0C00_G18_s2023061142500_c2023061142642.tar",
+                    "size": 241537,
+                    "eTag": "60378adfc647429cd7eb981a62b31aaf",
+                    "sequencer": "0063F8EED7E79D154D"
+                }
+            }
+        }
+    ]
+}

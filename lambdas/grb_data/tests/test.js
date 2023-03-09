@@ -10,7 +10,7 @@ const testProcessEvent = async (fileName) => {
 }
 
 const test = async () => {
-    const fileName = './tests/test3.json'
+    const fileName = './tests/test5.json'
     await testProcessEvent(fileName)
 }
 test()

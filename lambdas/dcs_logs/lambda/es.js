@@ -13,9 +13,9 @@ const ES_CLOUD_ID = process.env.ES_CLOUD_ID
 const ES_USER = process.env.ES_USER
 const ES_PWD = process.env.ES_PWD
 
-assert(ES_CLOUD_ID)
-assert(ES_USER)
-assert(ES_PWD)
+assert(ES_CLOUD_ID, 'Undefined env ES_CLOUD_ID')
+assert(ES_USER, 'Undefined env ES_USER')
+assert(ES_PWD, 'Undefined env ES_PWD')
 
 const options = {
   cloud: { id: ES_CLOUD_ID },
@@ -37,11 +37,11 @@ const SEARCH_DCS_LOGS_INDEX = process.env.SEARCH_DCS_LOGS_INDEX
 // assert(SEARCH_DCS_GOES_INDEX)
 // assert(SEARCH_DCS_IRIDIUM_INDEX)
 // assert(SEARCH_DCS_METRICS_INDEX)
-assert(SEARCH_DCS_LOGS_INDEX)
+assert(SEARCH_DCS_LOGS_INDEX, 'Undefined env SEARCH_DCS_LOGS_INDEX')
 
 const IndexDocument = async (index, document) => {
   try {
-    const result = await esClient.index({
+    await esClient.index({
       index,
       document
     })

@@ -66,7 +66,7 @@ run editPasswd
 ## Rebuild jar as necessary
 cd opendcs
 ant jar
-cp /app/dcs/opendcs/build/lib/opendcs.jar /app/dcs/opendcs/OPENDCS/bin/opendcs.jar
+cp $OPENDCS_HOME/build/lib/opendcs.jar $DCSTOOL_HOME/bin/opendcs.jar
 
 ## Restart LGRS
 startLRGS -l $LRGSHOME/lrgslog #-d 3

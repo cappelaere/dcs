@@ -23,7 +23,7 @@ import com.amazonaws.services.sns.model.PublishResult;
 import java.lang.System;
 
 public class SnsThread extends Thread {
-	private static final String DCSMetricTopicArn = System.getenv("DCS_LOGS_ARN");
+	private static final String DCSLogTopicArn = System.getenv("DCS_LOGS_ARN");
 
 	/** The QueueLogger to read from */
 	private QueueLogger qLogger;	
@@ -38,12 +38,12 @@ public class SnsThread extends Thread {
 		qLogger = ql;
 		_shutdown = false;
 
-    if( DCSMetricTopicArn == null ) {
-      Logger.instance().info("DCS_LOGS_ARN is not defined");
-      _shutdown = true;
-    } else {
-      snsClient = new AmazonSNSClient();
-    }
+		if( DCSLogTopicArn == null ) {
+		Logger.instance().info("DCS_LOGS_ARN is not defined");
+		_shutdown = true;
+		} else {
+		snsClient = new AmazonSNSClient();
+		}
 	}
 
 	/** the Thread run method */
@@ -57,11 +57,11 @@ public class SnsThread extends Thread {
 					sleep(500L);
 				} else {
 					// post to Sns Topic
-          if( DCSMetricTopicArn != null ) {
-            PublishResult result = snsClient.publish(new PublishRequest()
-              .withTopicArn(DCSMetricTopicArn)
-              .withMessage(msg));
-          } 
+					if( DCSLogTopicArn != null ) {
+						PublishResult result = snsClient.publish(new PublishRequest()
+						.withTopicArn(DCSLogTopicArn)
+						.withMessage(msg));
+					} 
 					idx++;
 				}
 			}

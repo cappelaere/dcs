@@ -74,7 +74,7 @@ const ProcessEvent = async (record) => {
   const arr = params.Key.split('/')
   const fileName = arr[arr.length - 1]
   const ext = fileName.split('.')[1]
-  if (ext !== 'nc') {
+  if (ext !== 'nc' && ext != 'tar') {
     console.log(`ignoring ext: ${ext}, for file: ${fileName}`)
     return null
   }

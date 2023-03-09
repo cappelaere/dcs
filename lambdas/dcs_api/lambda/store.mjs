@@ -25,7 +25,7 @@ const AWS_ACCOUNT = process.env.AWS_ACCOUNT
 const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID
 const R2_KEY = process.env.R2_KEY
 const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY
-const S3_BUCKET = 'geocloud-dcs'
+const S3_GRB_BUCKET = process.env.S3_GRB_BUCKET
 
 const s3Client = new S3Client({ region: AWS_REGION })
 
@@ -222,7 +222,7 @@ const test2 = async () => {
         const key = GetKeyName(json)
         console.log(`key: ${key}`)
 
-        await StoreS3(S3_BUCKET, key, data, 'application/br')
+        await StoreS3(S3_DCS_BUCKET, key, data, 'application/br')
         // await StoreR2(S3_BUCKET, key, data, 'application/br')
 
     } catch (err) {

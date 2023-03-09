@@ -12,8 +12,8 @@ const { assert } = require('console')
 const KAFKA_API_KEY = process.env.KAFKA_API_KEY
 const KAFKA_API_SECRET = process.env.KAFKA_API_SECRET
 
-assert(KAFKA_API_KEY)
-assert(KAFKA_API_SECRET)
+assert(KAFKA_API_KEY, 'Undefined env KAFKA_API_KEY')
+assert(KAFKA_API_SECRET, 'Undefined env KAFKA_API_SECRET')
 
 const config = {
   clientId: 'geocloud',

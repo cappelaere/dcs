@@ -19,8 +19,8 @@ const DCS_IRIDIUM_ARN = process.env.DCS_IRIDIUM_ARN
 const DCS_GOES = 'DCS_GOES'
 const DCS_IRIDIUM = 'DCS_IRIDIUM'
 
-assert(DCS_GOES_ARN)
-assert(DCS_IRIDIUM_ARN)
+assert(DCS_GOES_ARN, 'Undefined env DCS_GOES_ARN')
+assert(DCS_IRIDIUM_ARN, 'Undefined env DCS_IRIDIUM_ARN')
 
 const ParseXml = async (topic, xmlMessage) => {
   const json = await XMLParseString(xmlMessage)

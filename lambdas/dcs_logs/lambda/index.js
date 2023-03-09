@@ -13,7 +13,7 @@ exports.handler = async (event) => {
     const msg = SNSRecord.Sns.Message
 
     const timestamp = msg.slice(8, 28).trim()
-    const ts = moment(timestamp, "YYYY/MM/DD-HH:mm:ss")
+    const ts = moment(timestamp, 'YYYY/MM/DD-HH:mm:ss')
 
     const log = {
       type: msg.slice(0, 7).trim(),

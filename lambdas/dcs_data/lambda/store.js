@@ -6,21 +6,22 @@ const multihashing = require('multihashing-async')
 const moment = require('moment')
 const { assert } = require('console')
 
-const S3_BUCKET = process.env.S3_BUCKET
-const R2_BUCKET = process.env.R2_BUCKET
+const S3_DCS_BUCKET = process.env.S3_DCS_BUCKET
+const R2_DCS_BUCKET = process.env.R2_DCS_BUCKET
 const AWS_ACCOUNT = process.env.AWS_ACCOUNT
 const AWS_REGION = process.env.AWS_REGION
 const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID
 const R2_KEY = process.env.R2_KEY
 const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY
 
-assert(S3_BUCKET)
-assert(R2_BUCKET)
-assert(AWS_ACCOUNT)
-assert(AWS_REGION)
-assert(R2_ACCOUNT_ID)
-assert(R2_KEY)
-assert(R2_SECRET_ACCESS_KEY)
+assert(S3_DCS_BUCKET, 'Undefined env S3_DCS_BUCKET')
+assert(R2_DCS_BUCKET, 'Undefined env R2_DCS_BUCKET')
+
+assert(AWS_ACCOUNT, 'Undefined env AWS_ACCOUNT')
+assert(AWS_REGION, 'Undefined env AWS_REGION')
+assert(R2_ACCOUNT_ID, 'Undefined env R2_ACCOUNT_ID')
+assert(R2_KEY, 'Undefined env R2_KEY')
+assert(R2_SECRET_ACCESS_KEY, 'Undefined env R2_SECRET_ACCESS_KEY')
 
 const s3Client = new S3Client({ region: AWS_REGION })
 
@@ -87,7 +88,8 @@ const StoreData = async (storageClass, bucket, key, contents, contentType) => {
   }
   try {
     const command = new PutObjectCommand(input)
-    const response = await client.send(command)
+    await client.send(command)
+    // const response = await client.send(command)
     // console.log(response)
 
     const cid = await GenerateCid(contents)
@@ -112,13 +114,13 @@ const StoreData = async (storageClass, bucket, key, contents, contentType) => {
 }
 
 const StoreS3 = async (key, contents, contentType) => {
-  const bucket = S3_BUCKET
+  const bucket = S3_DCS_BUCKET
   await StoreData('s3', bucket, key, contents, contentType)
   // console.log(`Store in S3 bucket: ${bucket}, key:${key} ${contentType}`)
 }
 
 const StoreR2 = async (key, contents, contentType) => {
-  const bucket = R2_BUCKET
+  const bucket = R2_DCS_BUCKET
   await StoreData('r2', bucket, key, contents, contentType)
   // console.log(`Store in R2 bucket: ${bucket}, key: ${key} ${contentType}`)
 }

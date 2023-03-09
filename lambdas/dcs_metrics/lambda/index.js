@@ -18,7 +18,7 @@ const ParseXml = async (xmlMessage) => {
       DownLink[d].LastMsgRecvTime = moment.unix(DownLink[d].LastMsgRecvTime).format()
     }
     if (DownLink[d].LastMsgRecvTime === 0) {
-      DownLink[d].LastMsgRecvTime = "1970-01-01T00:00:00+00:00"
+      DownLink[d].LastMsgRecvTime = '1970-01-01T00:00:00+00:00'
     }
   }
 

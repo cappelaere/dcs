@@ -6,16 +6,16 @@ const multihashing = require('multihashing-async')
 const moment = require('moment')
 const { assert } = require('console')
 
-const S3_BUCKET = process.env.S3_BUCKET
-const R2_BUCKET = process.env.R2_BUCKET
+const S3_GRB_BUCKET = process.env.S3_GRB_BUCKET
+const R2_GRB_BUCKET = process.env.R2_GRB_BUCKET
 const AWS_ACCOUNT = process.env.AWS_ACCOUNT
 const AWS_REGION = process.env.AWS_REGION
 const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID
 const R2_KEY = process.env.R2_KEY
 const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY
 
-assert(S3_BUCKET, 'Undefined env S3_BUCKET')
-assert(R2_BUCKET, 'Undefined env R2_BUCKET')
+assert(S3_GRB_BUCKET, 'Undefined env S3_GRB_BUCKET')
+assert(R2_GRB_BUCKET, 'Undefined env R2_GRB_BUCKET')
 assert(AWS_ACCOUNT, 'Undefined env AWS_ACCOUNT')
 assert(AWS_REGION, 'Undefined env AWS_REGION')
 assert(R2_ACCOUNT_ID, 'Undefined env R2_ACCOUNT_ID')
@@ -113,13 +113,13 @@ const StoreData = async (storageClass, bucket, key, contents, contentType) => {
 }
 
 const StoreS3 = async (key, contents, contentType) => {
-  const bucket = S3_BUCKET
+  const bucket = S3_GRB_BUCKET
   await StoreData('s3', bucket, key, contents, contentType)
   // console.log(`Store in S3 bucket: ${bucket}, key:${key} ${contentType}`)
 }
 
 const StoreR2 = async (key, contents, contentType) => {
-  const bucket = R2_BUCKET
+  const bucket = R2_GRB_BUCKET
   await StoreData('r2', bucket, key, contents, contentType)
   // console.log(`Store in R2 bucket: ${bucket}, key: ${key} ${contentType}`)
 }
