@@ -19,4 +19,5 @@ lambdas/dcs_api/layer/nodejs/node_modules/
 lambdas/grb_data/lambda/node_modules/
 lambdas/grb_data/layer/nodejs/node_modules/
 
+*.pem
 **/*.zip
