@@ -168,7 +168,7 @@ const QueryGeoXOIndex = async (index, query, userFields, userLimit, timefield, f
 }
 
 const QueryDcs = async (index, query, userFields, userLimit, from, to) => {
-  timefield = 'LocalRecvTime'
+  const timefield = 'LocalRecvTime'
   return await QueryGeoXOIndex(index, query, userFields, userLimit, timefield, from, to)
 }
 

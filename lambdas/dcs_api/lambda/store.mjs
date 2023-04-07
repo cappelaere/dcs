@@ -188,9 +188,11 @@ async function PresignedUrl(client, bucket, key) {
 async function R2PresignedUrl(bucket, key) {
     return await PresignedUrl(r2Client, bucket, key)
 }
+
 async function S3PresignedUrl(bucket, key) {
     return await PresignedUrl(s3Client, bucket, key)
 }
+
 export {
     StoreS3,
     StoreR2,

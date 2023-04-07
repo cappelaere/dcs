@@ -4,8 +4,11 @@
 // Pat Cappelaere, IBM Consulting
 //
 
-const { SearchCid, QueryDcs } = require('./es.js')
+const { SearchCid, QueryDcs, SQLQuery } = require('./es.js')
 const { R2PresignedUrl, S3PresignedUrl } = require('./s3.js')
+const { CloudFrontPresignedUrl } = require("cloudfront.js")
+
+const { BuildSQLQueryDcs } = require('./openaisql.js')
 
 const SEARCH_DCS_GOES_INDEX = 'search-dcs-goes'
 const SEARCH_DCS_IRIDIUM_INDEX = 'search-dcs-iridium'
@@ -15,6 +18,9 @@ const GetCid = async (params, query, body, identity, agent) => {
   const cid = params.cid
   let json = await SearchCid(cid)
   if (json.ok && (json.ok === false)) return {}
+  if (json.length == 0) {
+    throw new Error(`CID not found ${cid}`)
+  }
 
   // default r2 storage
   if (!query) {
@@ -22,8 +28,10 @@ const GetCid = async (params, query, body, identity, agent) => {
   }
 
   if (query && query.class) {
+    let cls = query.class
+    if (cls === 'cf') cls = 's3'
     json = json.filter((r) => {
-      return (r.class === query.class)
+      return (r.class === cls)
     })
     json = json[0]
     switch (query.class) {
@@ -32,6 +40,9 @@ const GetCid = async (params, query, body, identity, agent) => {
         break
       case 's3':
         json.url = await S3PresignedUrl(json.bucket, json.key)
+        break
+      case 'cf':
+        json.url = await CloudFrontPresignedUrl(json.bucket, json.key)
         break
       default:
         console.log(`No presigned url for that storage class ${query.class}`)
@@ -49,15 +60,20 @@ const DownloadCid = async (params, query, body, identity, agent) => {
 const GetCidMeta = async (params, query, body, identity, agent) => {
   console.log('GetCidMeta')
   const cid = params.cid
-  const json = await SearchCid(cid)
-  return json
+  const arr = await SearchCid(cid)
+  // Find the s3 entry and add cf
+  const els = arr.filter((el) => { return (el.class == 's3') })
+  const cf = Object.assign({}, els[0])
+  cf.class = 'cf'
+  arr.push(cf)
+  return arr
 }
 
 //   body: '{"query":{"sat":"goes","platformId":"4565D704"},"fields":["cid","agency"],"limit":"10"}',
 const SearchDcs = async (params, query, body, identity, agent) => {
   console.log('SearchDCs')
   const searchQuery = body.query
-  const userFields = body.fields || ['cid']
+  const userFields = body.fields || ['all']
   const limit = parseInt(body.limit) || 10
   const sat = searchQuery.sat || 'goes'
 
@@ -84,9 +100,22 @@ const Logout = async (params, query, body, identity, agent) => {
   return {}
 }
 
+const SQLSearchDcs = async (params, query, body, identity, agent) => {
+  console.log('SQLSearchDcs')
+
+  const sql = await BuildSQLQueryDcs(body.query)
+  const results = await SQLQuery(sql)
+  return {
+    sql,
+    results
+  }
+}
+
 module.exports.GetCid = GetCid
 module.exports.DownloadCid = DownloadCid
 module.exports.GetCidMeta = GetCidMeta
 module.exports.SearchDcs = SearchDcs
+module.exports.SQLSearchDcs = SQLSearchDcs
+
 module.exports.Login = Login
 module.exports.Logout = Logout

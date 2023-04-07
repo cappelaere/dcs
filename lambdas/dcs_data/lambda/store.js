@@ -134,6 +134,7 @@ const StoreMessage = async (json) => {
   console.log(`Storing msg len: ${contents.length}, cid:${cid}, key:${key}`)
   await StoreR2(key, contents, contentType)
   await StoreS3(key, contents, contentType)
+  json.cid = cid
 }
 
 module.exports.StoreMessage = StoreMessage

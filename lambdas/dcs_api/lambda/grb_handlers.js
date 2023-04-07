@@ -6,6 +6,8 @@
 
 const { SearchIndex, QueryGeoXOIndex, SQLQuery } = require('./es.js')
 const { R2PresignedUrl, S3PresignedUrl } = require('./s3.js')
+const { CloudFrontPresignedUrl } = require('./cloudfront.js')
+
 const { BuildSQLQueryGRB } = require('./openaisql.js')
 
 const SEARCH_GRB_CIDS = 'search-grb-cids'
@@ -16,15 +18,19 @@ const GetGRBCid = async (params, query, body, identity, agent) => {
   const cid = params.cid
   let json = await SearchIndex(SEARCH_GRB_CIDS, cid)
   if (json.ok && (json.ok === false)) return {}
-
+  if (json.length == 0) {
+    throw new Error(`CID not found ${cid}`)
+  }
   // default r2 storage
   if (!query) {
     query = { class: 'r2' }
   }
 
   if (query && query.class) {
+    let cls = query.class
+    if (cls === 'cf') cls = 's3'
     json = json.filter((r) => {
-      return (r.class === query.class)
+      return (r.class === cls)
     })
     json = json[0]
     switch (query.class) {
@@ -33,6 +39,9 @@ const GetGRBCid = async (params, query, body, identity, agent) => {
         break
       case 's3':
         json.url = await S3PresignedUrl(json.bucket, json.key)
+        break
+      case 'cf':
+        json.url = await CloudFrontPresignedUrl(json.bucket, json.key)
         break
       default:
         console.log(`No presigned url for that storage class ${query.class}`)

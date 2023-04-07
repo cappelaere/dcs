@@ -1,8 +1,7 @@
 # dcs
 dcs
-## EC2 instance with Docker installed in userdata
 
-## 200MB Addtional Volume
+## 1000MB Addtional Volume
 mount to /app
 
 lsblk
@@ -69,5 +68,7 @@ ant jar
 cp $OPENDCS_HOME/build/lib/opendcs.jar $DCSTOOL_HOME/bin/opendcs.jar
 
 ## Restart LGRS
-startLRGS -l $LRGSHOME/lrgslog #-d 3
+source .env
+cd $LRGSHOME
+startLRGS -l lrgs.log #-d 3
 

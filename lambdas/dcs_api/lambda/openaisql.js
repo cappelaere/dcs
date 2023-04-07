@@ -12,7 +12,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY
 assert(OPENAI_API_KEY, 'undefined env OPENAI_API_KEY')
 
 //
-// Call OpenAPI to get requlting SQL query to send to ElasticSearch
+// Call OpenAPI to get resulting SQL query to send to ElasticSearch
 //
 const BuildSQLQueryGRB = async (query) => {
     const configuration = new Configuration({
@@ -93,6 +93,51 @@ SELECT`
     }
 }
 
+//
+// Call OpenAPI to get resulting SQL query to send to ElasticSearch
+//
+const BuildSQLQueryDcs = async (query) => {
+    const configuration = new Configuration({
+        apiKey: OPENAI_API_KEY,
+    })
+    const openai = new OpenAIApi(configuration)
+
+    try {
+        // const prompt = "### Postgres SQL tables, with their properties:\n#\n# Employee(id, name, department_id)\n# Department(id, name, address)\n# Salary_Payments(id, employee_id, amount, date)\n#\n### A query to list the names of the departments which employed more than 10 employees in the last 3 months\nSELECT"
+        let prompt = `### Mappings:
+#
+### SQL table, with their properties:
+#
+# search-dcs-goes(cid, sat, platformid, LocalRecvTime, flags, msg)
+# search-dcs-iridium(cid, sat, platformId, LocalRecvTime, flags, msg)
+# 
+#
+### A query to ${query}
+SELECT`
+
+        const completion = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt,
+            temperature: 0,
+            max_tokens: 150,
+            top_p: 1.0,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.0,
+            stop: ['#', ';']
+        });
+
+        const result = `SELECT ${completion.data.choices[0].text}`;
+        return FixQuery(result)
+    } catch (error) {
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data);
+        } else {
+            console.log(error.message);
+        }
+    }
+}
+
 const FixInterval = (query) => {
     if (query.indexOf('interval') > 0) {
         const interval = query.indexOf('interval')
@@ -123,7 +168,8 @@ const FixDateSub = (query) => {
 }
 
 const FixIndex = (query) => {
-    query = query.replace('search-grb-index', '\"search-grb-index\"')
+    query = query.replace('search-dcs-goes', '\"search-dcs-goes\"')
+    query = query.replace('search-dcs-iridium', '\"search-dcs-iridium\"')
     return query
 }
 
@@ -137,3 +183,5 @@ const FixQuery = (sqlQuery) => {
 }
 
 module.exports.BuildSQLQueryGRB = BuildSQLQueryGRB
+module.exports.BuildSQLQueryDcs = BuildSQLQueryDcs
+

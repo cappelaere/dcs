@@ -2,7 +2,7 @@
 // DCS Interface for the GeoXO CLI support
 //
 
-const { GetCid, DownloadCid, GetCidMeta, SearchDcs, Login, Logout } = require('./handlers.js')
+const { GetCid, DownloadCid, GetCidMeta, SearchDcs, SQLSearchDcs, Login, Logout } = require('./handlers.js')
 const { GetGRBCid, DownloadGRBCid, GetGRBCidMeta, SearchGRB, SQLSearchGRB } = require('./grb_handlers.js')
 
 const { jwtVerifier1, jwtVerifier2 } = require('./jwt.js')
@@ -12,6 +12,7 @@ const handlers = {
   DownloadCid,
   GetCidMeta,
   SearchDcs,
+  SQLSearchDcs,
   Login,
   Logout,
   GetGRBCid,
@@ -26,36 +27,42 @@ exports.handler = async function (event, context) {
   // console.log('## PGC2 ENVIRONMENT VARIABLES: ' + serialize(process.env))
   // console.log('## PGC2 CONTEXT: ' + serialize(context))
   console.log('## PGC3 EVENT: ' + serialize(event))
-
-  const query = event.queryStringParameters
-  const params = event.pathParameters
-  const operation = event.requestContext.operationName
-  let identity = event.requestContext.identity
-  const agent = identity.userAgent
-  let body = event.body
-
-  if (event.headers && event.headers.id_token && event.headers.auth_token) {
-    const id_token = event.headers.id_token
-    const auth_token = event.headers.auth_token
-    const user = await jwtVerifier2(id_token)
-    const authToken = await jwtVerifier1(auth_token)
-
-    identity = user.payload
-    identity.permissions = authToken.payload.permissions
-    if (!identity.permissions.includes('read:dcs')) {
-      const error = {
-        statusCode: 403,
-        message: "Forbidden. No permission for attempted operation"
-      }
-      return formatError(error)
-    }
-    console.log(`Identity: ${JSON.stringify(identity)}`)
-  } else {
-    console.log("Could not find id_token and auth_token in headers")
-    // should really return 401 - Authorized
-  }
-
   try {
+
+    const query = event.queryStringParameters
+    const params = event.pathParameters
+    const operation = event.requestContext.operationName
+    let identity = event.requestContext.identity
+    const agent = identity.userAgent
+    let body = event.body
+
+    if (event.headers && event.headers.id_token && event.headers.auth_token) {
+      const id_token = event.headers.id_token
+      const auth_token = event.headers.auth_token
+      const user = await jwtVerifier2(id_token)
+      const authToken = await jwtVerifier1(auth_token)
+      if (!user) {
+        const error = {
+          statusCode: 455,
+          message: "Invalid Token. Please login!"
+        }
+        return formatError(error)
+      }
+      identity = user.payload
+      identity.permissions = authToken.payload.permissions
+      if (!identity.permissions.includes('read:dcs') && !identity.permissions.includes('read:grb')) {
+        const error = {
+          statusCode: 403,
+          message: "Forbidden. No permission for attempted operation"
+        }
+        return formatError(error)
+      }
+      console.log(`Identity: ${JSON.stringify(identity)}`)
+    } else {
+      console.log("Could not find id_token and auth_token in headers")
+      // should really return 401 - Authorized
+    }
+
     if (body) {
       console.log(`body: ${body}`)
       body = JSON.parse(body)
@@ -97,7 +104,7 @@ const formatError = (error) => {
       'x-amzn-ErrorType': error.code
     },
     isBase64Encoded: false,
-    body: error.code + ': ' + error.message
+    body: error.message
   }
   return response
 }

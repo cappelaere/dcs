@@ -21,3 +21,5 @@ lambdas/grb_data/layer/nodejs/node_modules/
 
 *.pem
 **/*.zip
+
+gradle*

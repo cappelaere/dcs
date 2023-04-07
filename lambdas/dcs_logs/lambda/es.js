@@ -39,11 +39,11 @@ const SEARCH_DCS_LOGS_INDEX = process.env.SEARCH_DCS_LOGS_INDEX
 // assert(SEARCH_DCS_METRICS_INDEX)
 assert(SEARCH_DCS_LOGS_INDEX, 'Undefined env SEARCH_DCS_LOGS_INDEX')
 
-const IndexDocument = async (index, document) => {
+const IndexDocument = async (index, log) => {
   try {
     await esClient.index({
       index,
-      document
+      document: log
     })
     // console.log(result)
   } catch (err) {

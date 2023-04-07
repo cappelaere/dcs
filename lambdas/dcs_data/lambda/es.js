@@ -48,7 +48,7 @@ const IndexDocument = async (index, document) => {
 }
 
 const IndexCid = async (document) => {
-  const result = await IndexDocument(SEARCH_DCS_CIDS_INDEX, document, null)
+  const result = await IndexDocument(SEARCH_DCS_CIDS_INDEX, document)
   return result
 }
 

@@ -10,6 +10,7 @@ const { StoreMessage } = require('./store.js')
 const { PublishMessage } = require('./publish.js')
 const { KafkaInit, KafkaDisconnect } = require('./kafka.js')
 const { IndexMessage } = require('./es.js')
+const platforms = require('pdt.json')
 
 const moment = require('moment')
 const assert = require('assert')
@@ -22,6 +23,7 @@ const DCS_IRIDIUM = 'DCS_IRIDIUM'
 assert(DCS_GOES_ARN, 'Undefined env DCS_GOES_ARN')
 assert(DCS_IRIDIUM_ARN, 'Undefined env DCS_IRIDIUM_ARN')
 
+
 const ParseXml = async (topic, xmlMessage) => {
   const json = await XMLParseString(xmlMessage)
 
@@ -30,11 +32,12 @@ const ParseXml = async (topic, xmlMessage) => {
 
   if (DcpMsg.CarrierStart) DcpMsg.CarrierStart = moment(DcpMsg.CarrierStart, 'YYYY/DDD HH:mm:ss.SSSS').format()
   if (DcpMsg.CarrierStop) DcpMsg.CarrierStop = moment(DcpMsg.CarrierStop, 'YYYY/DDD HH:mm:ss.SSSS').format()
-  if (DcpMsg.DomsatTime) DcpMsg.DomsatTime = moment(DcpMsg.DomsatTime, 'YYYY/DDD HH:mm:ss.SSSS').format()
+  if (DcpMsg.DomsatTime) DcpMsg.DomsatTime = 0  // moment(DcpMsg.DomsatTime, 'YYYY/DDD HH:mm:ss.SSSS').format()
   if (DcpMsg.XmitTime) DcpMsg.XmitTime = moment(DcpMsg.XmitTime, 'YYYY/DDD HH:mm:ss.SSSS').format()
 
   if (topic.indexOf(DCS_GOES) >= 0) {
     DcpMsg.sat = 'goes'
+    DcpMsg.agency = platforms[DcpMsg.platformId]
   } else if (topic.indexOf(DCS_IRIDIUM) >= 0) {
     DcpMsg.sat = 'iridium'
   } else {
@@ -75,3 +78,5 @@ exports.handler = async (event) => {
     return response
   }
 }
+
+module.exports.ParseXml = ParseXml

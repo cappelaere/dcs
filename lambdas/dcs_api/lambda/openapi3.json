@@ -102,6 +102,35 @@
         }
       }
     },
+    "/dcs/sql": {
+      "post": {
+        "summary": "Search DCS for a specific cid using SQL",
+        "operationId": "SQLSearchDcs",
+        "requestBody": {
+          "description": "Search for dcs cids",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Query"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Record"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/grb/{cid}": {
       "get": {
         "summary": "Info for a specific cid",
