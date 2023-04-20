@@ -1,0 +1,38 @@
+[
+    {
+        "Baud": 300,
+        "BinaryMsg": "NDU1RDEwQ0MyMzEwMjIxMTUwNEc0NisxTk4xNzVFVVAwMDIzMSAgOkhHIDUgIzUgMS41MjIgMS41MjEgMS41MjAgMS41MjMgMS41MjMgMS41MjQgMS40MjggMS40MzAgMS40MjkgMS40MzEgMS40MzIgMS40MzIgOkhHMiA1ICM1IDk5OTk5IDk5OTk5IDk5OTk5IDk5OTk5IDk5OTk5IDk5OTk5IDk5OTk5IDk5OTk5IDk5OTk5IDk5OTk5IDk5OTk5IDk5OTk5IDpUQSAxNSAjNjAgOC44IDpWQiAxNSAjNjAgMTQuNSA6VFcgMTUgIzYwIDk5OTk5IDpUVzIgMTUgIzYwIDk5OTk5IA==",
+        "CarrierStart": "2023-04-12T21:15:04.000Z",
+        "CarrierStop": "2023-04-12T21:15:11.000Z",
+        "DomsatSeq": 16993,
+        "DomsatTime": 0,
+        "FreqOffset": 32.5,
+        "GoodPhasePct": 100,
+        "LocalRecvTime": "2023-04-12T21:21:08.000Z",
+        "PhaseNoise": 1.55,
+        "SignalStrength": 45.9,
+        "agency": "WSCREG",
+        "cid": "bafkreidzelvhzi3vipmdlg4ubrwfba7dxudrlrsqmfxr3bgons3bpria2u",
+        "flags": "0x00081855",
+        "platformId": "455D10CC",
+        "sat": "goes"
+    },
+    {
+        "Baud": 300,
+        "BinaryMsg": "QzBEMDA5RjQyMzEwMjIxMTUxMEc0MCswTk4wNDhXVUIwMDAxOGJCMU9AQlRAQlRAQlRAQlVNIA==",
+        "CarrierStart": "2023-04-12T21:15:10.000Z",
+        "CarrierStop": "2023-04-12T21:15:11.000Z",
+        "DomsatSeq": 33074,
+        "DomsatTime": 0,
+        "FreqOffset": 2.3,
+        "GoodPhasePct": 100,
+        "LocalRecvTime": "2023-04-12T21:21:08.000Z",
+        "PhaseNoise": 1.16,
+        "SignalStrength": 40.4,
+        "agency": "IDPCOM",
+        "cid": "bafkreigoqad73fy6yt6ccgxknv62nofcyzodwvcqirsmrcg23oohyvp4ui",
+        "flags": "0x00081855",
+        "platformId": "C0D009F4",
+        "sat": "goes"
+    }
+]

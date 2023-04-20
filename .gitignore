@@ -23,3 +23,9 @@ lambdas/grb_data/layer/nodejs/node_modules/
 **/*.zip
 
 gradle*
+src/kafka/archive/*
+src/kafka/.gradle
+src/kafka/build
+
+clients/appsync/node_modules/*
+clients/appsync/mypubsub-app/node_modules/*

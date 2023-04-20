@@ -16,11 +16,14 @@ const SEARCH_GRB_DOCS = 'search-grb-index'
 const GetGRBCid = async (params, query, body, identity, agent) => {
   console.log('GetGRBCid')
   const cid = params.cid
-  let json = await SearchIndex(SEARCH_GRB_CIDS, cid)
-  if (json.ok && (json.ok === false)) return {}
-  if (json.length == 0) {
+  let all = await SearchIndex(SEARCH_GRB_CIDS, cid)
+  if (all.ok && (all.ok === false)) return {}
+  if (all.length == 0) {
     throw new Error(`CID not found ${cid}`)
   }
+
+  let json
+
   // default r2 storage
   if (!query) {
     query = { class: 'r2' }
@@ -29,9 +32,14 @@ const GetGRBCid = async (params, query, body, identity, agent) => {
   if (query && query.class) {
     let cls = query.class
     if (cls === 'cf') cls = 's3'
-    json = json.filter((r) => {
+    json = all.filter((r) => {
       return (r.class === cls)
     })
+
+    if (json.length == 0) { // did not pass the storage class, use what we have
+      json = all
+    }
+
     json = json[0]
     switch (query.class) {
       case 'r2':

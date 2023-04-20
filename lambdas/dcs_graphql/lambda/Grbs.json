@@ -1,0 +1,78 @@
+[
+    {
+        "bucket": "grbprototype",
+        "key": "op/GOES-16/l1b/ABI/2023/mar/20230302/OR_ABI-L1b-RadF-M6C10_G16_s20230611920207_e20230611929528_c20230611929558.nc",
+        "fileName": "OR_ABI-L1b-RadF-M6C10_G16_s20230611920207_e20230611929528_c20230611929558.nc",
+        "fileSize": 23326376,
+        "startTime": "2023-03-02T19:20:20.000Z",
+        "endTime": "2023-03-02T19:29:52.000Z",
+        "creationTime": "2023-03-02T19:29:55.000Z",
+        "lastModifiedTime": "2023-03-02T19:30:01.000Z",
+        "eventTime": "2023-03-02T19:30:01.642Z",
+        "insertTime": "2023-03-02T19:30:02.913Z",
+        "environment": "OR",
+        "satellite": "G16",
+        "level": "L1B",
+        "instrument": "ABI",
+        "dsn": "ABI-L1b-RadF",
+        "mode": "M6",
+        "imagingDelay": 572,
+        "creationDelay": 3,
+        "storageDelay": 6,
+        "notifyDelay": 0,
+        "insertDelay": 1,
+        "cid": "bafkreicnkkxlj4xgmzpvzpg5svac2atpncbl3uwbhmq5762mxw7nks2af4",
+        "stores": [
+            {
+                "cid": "bafkreihhlqxuvdhu55phlwqiwrszpmfm25zdxkjiq3rehhkzzhxqfebnd4",
+                "class": "s3",
+                "account": "938337067586",
+                "bucket": "grbprototype",
+                "key": "op/GOES-16/l2/GLM/2023/mar/20230302/OR_GLM-L2-LCFA_G16_s20230611930000_e20230611930200_c20230611930216.nc",
+                "size": 438315,
+                "mtime": "2023-03-02T19:30:29.000Z",
+                "type": "application/x-netcdf",
+                "id": "TTzNo4YB0RkJlAj59kCV",
+                "url": "https://ddh6z87uol079.cloudfront.net/op/GOES-16/l2/GLM/2023/mar/20230302/OR_GLM-L2-LCFA_G16_s20230611930000_e20230611930200_c20230611930216.nc?Expires=1681645765&Key-Pair-Id=KT081R6AK2PIX&Signature=kq0wo2pyVsRVeNmzjI~ZscBEQsw6RAGWt3aubnpOhktpjq90NhYgwPbHwBSCs9F6nKsGJyw6qggxBuf6agRqpmrw1tM5d7OjpH2~I~ltkGpPHpPBrMcZLgnNwzoji4sXKqTGL8Y9Xu0DaB1ovIeYlIncFA0oru7AGgMOZ8HD4n1YBEHzDF3MRX35vqY9FoKooM4plUx5i5FOKiYHpF8mSGVrvRyhFXzJ90VFdPuxa7Xv~FxwYj~rbv-kLsQB-Thhv69n-SbV4yneT3ark5jauooAK51~8EuKTGuNyYuL3QVHkFIm~a5VL-d~D~GZ7KAwPrguBMdhNOmlzM9IgMlAhQ__"
+            }
+        ]
+    },
+    {
+        "bucket": "grbprototype",
+        "key": "op/GOES-16/l2/GLM/2023/mar/20230302/OR_GLM-L2-LCFA_G16_s20230611930000_e20230611930200_c20230611930216.nc",
+        "fileName": "OR_GLM-L2-LCFA_G16_s20230611930000_e20230611930200_c20230611930216.nc",
+        "fileSize": 438315,
+        "startTime": "2023-03-02T19:30:00.000Z",
+        "endTime": "2023-03-02T19:30:20.000Z",
+        "creationTime": "2023-03-02T19:30:21.000Z",
+        "lastModifiedTime": "2023-03-02T19:30:29.000Z",
+        "eventTime": "2023-03-02T19:30:28.291Z",
+        "insertTime": "2023-03-02T19:30:29.583Z",
+        "environment": "OR",
+        "satellite": "G16",
+        "level": "L2",
+        "instrument": "GLM",
+        "dsn": "GLM-L2-LCFA",
+        "mode": "NA",
+        "imagingDelay": 20,
+        "creationDelay": 1,
+        "storageDelay": 8,
+        "notifyDelay": -1,
+        "insertDelay": 1,
+        "cid": "bafkreihhlqxuvdhu55phlwqiwrszpmfm25zdxkjiq3rehhkzzhxqfebnd4",
+        "stores": [
+            {
+                "cid": "bafkreihhlqxuvdhu55phlwqiwrszpmfm25zdxkjiq3rehhkzzhxqfebnd4",
+                "class": "s3",
+                "account": "938337067586",
+                "bucket": "grbprototype",
+                "key": "op/GOES-16/l2/GLM/2023/mar/20230302/OR_GLM-L2-LCFA_G16_s20230611930000_e20230611930200_c20230611930216.nc",
+                "size": 438315,
+                "mtime": "2023-03-02T19:30:29.000Z",
+                "type": "application/x-netcdf",
+                "id": "TTzNo4YB0RkJlAj59kCV",
+                "url": "https://ddh6z87uol079.cloudfront.net/op/GOES-16/l2/GLM/2023/mar/20230302/OR_GLM-L2-LCFA_G16_s20230611930000_e20230611930200_c20230611930216.nc?Expires=1681645765&Key-Pair-Id=KT081R6AK2PIX&Signature=kq0wo2pyVsRVeNmzjI~ZscBEQsw6RAGWt3aubnpOhktpjq90NhYgwPbHwBSCs9F6nKsGJyw6qggxBuf6agRqpmrw1tM5d7OjpH2~I~ltkGpPHpPBrMcZLgnNwzoji4sXKqTGL8Y9Xu0DaB1ovIeYlIncFA0oru7AGgMOZ8HD4n1YBEHzDF3MRX35vqY9FoKooM4plUx5i5FOKiYHpF8mSGVrvRyhFXzJ90VFdPuxa7Xv~FxwYj~rbv-kLsQB-Thhv69n-SbV4yneT3ark5jauooAK51~8EuKTGuNyYuL3QVHkFIm~a5VL-d~D~GZ7KAwPrguBMdhNOmlzM9IgMlAhQ__"
+            }
+        ]
+    }
+]

@@ -1,0 +1,15 @@
+{
+  "name": "appsync",
+  "version": "1.0.0",
+  "main": "aws-exports.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pat Cappelaere, IBM Consulting",
+  "license": "ISC",
+  "description": "AppSync Client",
+  "dependencies": {
+    "@aws-amplify/api": "^5.0.28"
+  }
+}
