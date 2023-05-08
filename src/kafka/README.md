@@ -9,4 +9,4 @@ $GRADLE/gradle build
 $GRADLE/gradle jar
 $GRADLE/gradle shadowjar
 
-java -cp build/libs/kafka-java-getting-started-0.0.1.jar examples.ConsumerExample dcs.goes.NOAANOS
+java -cp build/libs/kafka-java-getting-started-0.0.1.jar examples.ConsumerExample dcs.goes.NOANOS

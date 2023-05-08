@@ -29,3 +29,4 @@ src/kafka/build
 
 clients/appsync/node_modules/*
 clients/appsync/mypubsub-app/node_modules/*
+lambdas/dcs_graphql/layer/nodejs/node_modules/*

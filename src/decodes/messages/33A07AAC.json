@@ -1,0 +1,18 @@
+{
+    "DomsatSeq": 31431,
+    "DomsatTime": 0,
+    "CarrierStart": "2023-03-17T01:03:06+00:00",
+    "CarrierStop": "2023-03-17T01:03:08+00:00",
+    "Baud": 300,
+    "GoodPhasePct": 97.8,
+    "FreqOffset": -0.7,
+    "SignalStrength": 36.4,
+    "PhaseNoise": 3.24,
+    "LocalRecvTime": "2023-03-17T01:04:35+00:00",
+    "BinaryMsg": "MzNBMDdBQUMyMzA3NjAxMDMwNkczNi0wTk4wNjlFVVAwMDA0MiJQODcyMjk1NjNAQEBAQEBAdjBaQ0AzQHxBYUFTM0B7QWJBUjxCSCBpIA==",
+    "flags": "0x00081855",
+    "platformId": "33A07AAC",
+    "sat": "goes",
+    "cid": "bafkreic46cgk34ffruk77ejc63zqsf4kogf3uusvvcce73wkqvdt3vpfja",
+    "RawData": "33A07AAC23076010306G36-0NN069EUP00042\"P87229563@@@@@@@v0ZC@3@|AaAS3@{AbAR<BH i "
+}

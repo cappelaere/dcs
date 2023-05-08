@@ -13,6 +13,12 @@ const { BuildSQLQueryDcs } = require('./openaisql.js')
 const SEARCH_DCS_GOES_INDEX = 'search-dcs-goes'
 const SEARCH_DCS_IRIDIUM_INDEX = 'search-dcs-iridium'
 
+const FormatData = (json) => {
+  let buff = Buffer.from(json.BinaryMsg, 'base64');
+  json.RawData = buff.toString('ascii');
+  return json
+}
+
 const GetCid = async (params, query, body, identity, agent) => {
   console.log('GetCid')
   const cid = params.cid
@@ -86,8 +92,8 @@ const SearchDcs = async (params, query, body, identity, agent) => {
   } else {
     throw new Error(`Invalid sat ${sat}`)
   }
-
-  return await QueryDcs(index, searchQuery, userFields, limit)
+  const result = await QueryDcs(index, searchQuery, userFields, limit)
+  return result.map((j) => FormatData(j))
 }
 
 const Login = async (params, query, body, identity, agent) => {
@@ -104,7 +110,9 @@ const SQLSearchDcs = async (params, query, body, identity, agent) => {
   console.log('SQLSearchDcs')
 
   const sql = await BuildSQLQueryDcs(body.query)
-  const results = await SQLQuery(sql)
+  let results = await SQLQuery(sql)
+  results = results.map((j) => FormatData(j))
+
   return {
     sql,
     results

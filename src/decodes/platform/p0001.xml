@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><Platform PlatformId="68">
+  <Agency>local</Agency>
+  <IsProduction>false</IsProduction>
+  <LastModifyTime>01/18/2015 14:50:00</LastModifyTime>
+  <Site>
+    <Elevation>0.000</Elevation>
+    <ElevationUnits>ft</ElevationUnits>
+    <SiteName NameType="local">mc0101</SiteName>
+  </Site>
+  <PlatformConfig ConfigName="currentMeter-sontek">
+    <Description>No Description</Description>
+    <ConfigSensor SensorNumber="1">
+      <SensorName>test</SensorName>
+      <DataType Code="TE" Standard="SHEF-PE"/>
+      <RecordingMode>F</RecordingMode>
+      <RecordingInterval>01:00</RecordingInterval>
+      <TimeOfFirstSample>00:00</TimeOfFirstSample>
+    </ConfigSensor>
+    <DecodesScript ScriptName="st">
+      <ScriptType>Decodes</ScriptType>
+      <FormatStatement Label="start">F(s,k,2,1)</FormatStatement>
+      <ScriptSensor SensorNumber="1">
+        <UnitConverter FromUnitsAbbr="raw" ToUnitsAbbr="raw">
+          <Algorithm>none</Algorithm>
+          <A>0.0</A>
+          <B>0.0</B>
+          <C>0.0</C>
+          <D>0.0</D>
+          <E>0.0</E>
+          <F>0.0</F>
+        </UnitConverter>
+      </ScriptSensor>
+    </DecodesScript>
+  </PlatformConfig>
+  <TransportMedium MediumId="33A126F8" MediumType="goes-self-timed">
+    <DecodesScript ScriptName="st"/>
+    <ChannelNum>307</ChannelNum>
+    <Preamble>S</Preamble>
+    <TimeZone>UTC</TimeZone>
+  </TransportMedium>
+  <PlatformSensor SensorNumber="1"/>
+</Platform>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><PlatformList>
+  <PlatformXref PlatformId="68">
+    <TransportXref MediumId="33A126F8" MediumType="goes-self-timed"/>
+    <SiteName NameType="local">mc0101</SiteName>
+    <Agency>local</Agency>
+    <ConfigName>currentMeter-sontek</ConfigName>
+    <IsProduction>false</IsProduction>
+    <LastModifyTime>01/18/2015 14:50:00</LastModifyTime>
+  </PlatformXref>
+  <PlatformXref PlatformId="69">
+    <TransportXref MediumId="33A1282A" MediumType="goes-self-timed"/>
+    <SiteName NameType="local">mg0101</SiteName>
+    <Agency>local</Agency>
+    <ConfigName>currentMeter-sontek</ConfigName>
+    <IsProduction>false</IsProduction>
+    <LastModifyTime>01/11/2016 13:23:00</LastModifyTime>
+  </PlatformXref>
+    <PlatformXref PlatformId="234">
+    <TransportXref MediumId="33A0747E" MediumType="goes-self-timed"/>
+    <SiteName NameType="local">87229561</SiteName>
+    <Agency>local</Agency>
+    <ConfigName>Nos6min</ConfigName>
+    <IsProduction>false</IsProduction>
+    <LastModifyTime>01/30/2018 00:01:00</LastModifyTime>
+  </PlatformXref>
+  <PlatformXref PlatformId="235">
+    <TransportXref MediumId="33A07AAC" MediumType="goes-self-timed"/>
+    <SiteName NameType="local">87229563</SiteName>
+    <Agency>local</Agency>
+    <ConfigName>Nos6min</ConfigName>
+    <IsProduction>false</IsProduction>
+    <LastModifyTime>01/30/2018 00:01:00</LastModifyTime>
+  </PlatformXref>
+</PlatformList>
