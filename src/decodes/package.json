@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.8.0",
+    "moment": "^2.29.4"
+  }
+}

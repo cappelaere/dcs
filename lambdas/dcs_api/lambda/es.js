@@ -92,11 +92,13 @@ const FormatQuery = (query, timefield, from, to) => {
   return finalQuery
 }
 
-const QueryIndex = async (index, query) => {
+const QueryIndex = async (index, query, size) => {
   try {
     const result = await esClient.search({
       index,
-      query
+      query,
+      size,
+      sort: [{ LocalRecvTime: { order: "desc" } }]
     })
     const results = result.hits.hits.map((r) => r._source)
     return results
@@ -138,7 +140,7 @@ const QueryGeoXOIndex = async (index, query, userFields, userLimit, timefield, f
 
   console.log(`QueryGeoXOIndex: ${index}, ${JSON.stringify(formattedQuery)}, ${fields}, ${limit}`)
 
-  const results = await QueryIndex(index, formattedQuery)
+  const results = await QueryIndex(index, formattedQuery, userLimit)
   console.log(results)
   const res = results.map((r) => {
     if (fields.length === 1) {
@@ -167,8 +169,8 @@ const QueryGeoXOIndex = async (index, query, userFields, userLimit, timefield, f
   }
 }
 
-const QueryDcs = async (index, query, userFields, userLimit, from, to) => {
-  const timefield = 'LocalRecvTime'
+const QueryDcs = async (index, query, userFields, userLimit, timefield, from, to) => {
+  // const timefield = 'LocalRecvTime'
   return await QueryGeoXOIndex(index, query, userFields, userLimit, timefield, from, to)
 }
 
@@ -177,3 +179,20 @@ module.exports.QueryDcs = QueryDcs
 module.exports.SearchIndex = SearchIndex
 module.exports.QueryGeoXOIndex = QueryGeoXOIndex
 module.exports.SQLQuery = SQLQuery
+
+const test = async () => {
+  const searchQuery = {
+    "match": {
+      "platformId": "CE44B7BA"
+    }
+  }
+
+  const limit = 12
+  const index = "search-dcs-goes"
+  const results = await QueryIndex(index, searchQuery, limit)
+  console.log(results)
+  for (let r of results) {
+    console.log(r.CarrierStart, r.CarrierStop, r.LocalRecvTime)
+  }
+}
+test()

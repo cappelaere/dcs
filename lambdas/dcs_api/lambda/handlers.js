@@ -6,12 +6,13 @@
 
 const { SearchCid, QueryDcs, SQLQuery } = require('./es.js')
 const { R2PresignedUrl, S3PresignedUrl } = require('./s3.js')
-const { CloudFrontPresignedUrl } = require("cloudfront.js")
+const { CloudFrontPresignedUrl } = require("./cloudfront.js")
 
 const { BuildSQLQueryDcs } = require('./openaisql.js')
 
 const SEARCH_DCS_GOES_INDEX = 'search-dcs-goes'
 const SEARCH_DCS_IRIDIUM_INDEX = 'search-dcs-iridium'
+const SEARCH_DCS_DECODED_INDEX = 'search-dcs-decoded'
 
 const FormatData = (json) => {
   let buff = Buffer.from(json.BinaryMsg, 'base64');
@@ -83,16 +84,21 @@ const SearchDcs = async (params, query, body, identity, agent) => {
   const limit = parseInt(body.limit) || 10
   const sat = searchQuery.sat || 'goes'
 
-  let index
+  let index, timefield
 
   if (sat === 'goes') {
     index = SEARCH_DCS_GOES_INDEX
+    timefield = 'LocalRecvTime'
   } else if (sat === 'iridium') {
     index = SEARCH_DCS_IRIDIUM_INDEX
+    timefield = 'LocalRecvTime'
+  } else if (sat === 'decode') {
+    index = SEARCH_DCS_DECODED_INDEX
+    timefield = 'timestamp'
   } else {
     throw new Error(`Invalid sat ${sat}`)
   }
-  const result = await QueryDcs(index, searchQuery, userFields, limit)
+  const result = await QueryDcs(index, searchQuery, userFields, limit, timefield)
   return result.map((j) => FormatData(j))
 }
 
@@ -127,3 +133,4 @@ module.exports.SQLSearchDcs = SQLSearchDcs
 
 module.exports.Login = Login
 module.exports.Logout = Logout
+

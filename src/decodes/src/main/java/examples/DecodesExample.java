@@ -5,6 +5,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.DirectoryStream;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -277,7 +278,17 @@ public class DecodesExample {
         JsonObject obj = parser.parse(new FileReader(msgFileName)).getAsJsonObject();
         Logger.instance().info("JSON: " + obj.toString());
 
-        String rawData = obj.get("RawData").getAsString();
+        JsonElement rawDataObj = obj.get("RawData");
+        String rawData = null;
+
+        if (rawDataObj == null) {
+            String binaryData = obj.get("BinaryMsg").getAsString();
+            byte[] decodedBytes = Base64.getDecoder().decode(binaryData);
+            rawData = new String(decodedBytes);
+        } else {
+            rawData = rawDataObj.getAsString();
+        }
+
         String mediumId = obj.get("platformId").getAsString();
         String mediumType = "goes-self-timed";
 
@@ -304,7 +315,8 @@ public class DecodesExample {
         }
     }
 
-    public static void main(final String[] args) throws Exception {
+    // Main to decode a single file
+    public static void main2(final String[] args) throws Exception {
         // Logger.instance().setMinLogPriority(Logger.E_DEBUG3);
 
         String msgFileName = args[0];
@@ -315,6 +327,36 @@ public class DecodesExample {
         JsonObject obj = DecodeMessageFile(platformList, msgFileName);
         if (obj != null) {
             Logger.instance().info(obj.toString());
+        }
+    }
+
+    public static void main(final String[] args) throws Exception {
+        String dir = "/app/dcs/src/decodes/87229561";
+        String outdir = "/app/dcs/src/decodes/87229561.json";
+
+        Path path = Paths.get(dir);
+        PlatformList platformList = buildPlatformList();
+
+        try (DirectoryStream<Path> ds = Files.newDirectoryStream(path, "*.br")) {
+            for (Path file : ds) {
+                String msgFileName = dir + "/" + file.getFileName().toString();
+                System.out.println(msgFileName);
+                try {
+                    JsonObject obj = DecodeMessageFile(platformList, msgFileName);
+                    if (obj != null) {
+                        FileWriter newfile = new FileWriter(outdir + "/" + file.getFileName() + ".json");
+
+                        newfile.write(obj.toString());
+                        newfile.close();
+                        System.out.println(outdir + "/" + file.getFileName() + ".json");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                // break;
+            }
+        } catch (IOException e) {
+            System.err.println(e);
         }
     }
 }

@@ -41,3 +41,5 @@ const S3PresignedUrl = async (bucket, key) => {
 
 module.exports.S3PresignedUrl = S3PresignedUrl
 module.exports.R2PresignedUrl = R2PresignedUrl
+module.exports.r2Client = r2Client
+module.exports.s3Client = s3Client
